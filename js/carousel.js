@@ -21,21 +21,50 @@ class Carousel {
             Carousel._arr = arr;
             Carousel._sequence = 0;
             Carousel._size = arr.length;
-            Carousel.Next(); //start
+            Carousel.Show(); //start
             Carousel._interval = setInterval(function () { Carousel.Next(); }, 3000);
+
+            document.getElementById('next').addEventListener('click', () => {
+                clearInterval(Carousel._interval);
+                Carousel.Next();
+                Carousel._interval = setInterval(() => Carousel.Next(), 3000);
+            });
+
+            document.getElementById('prev').addEventListener('click', () => {
+                clearInterval(Carousel._interval);
+                Carousel.Prev();
+                Carousel._interval = setInterval(() => Carousel.Next(), 3000);
+            });
         }
     }
 
-    static Next() {
+    static Show() {
         const carousel = document.getElementById('carousel');
         const carouselTitle = document.getElementById('carousel-title');
         const atual = Carousel._arr[Carousel._sequence];
 
-        carousel.innerHTML = `<img src="./img/${atual.img}" alt=""></img>`;
+        carousel.querySelector('img')?.remove(); // remove imagem anterior, se existir
+        const img = document.createElement('img');
+        img.src = `./img/${atual.img}`;
+        img.alt = atual.texto;
+        carousel.insertBefore(img, document.getElementById('prev')); // insere antes das setas
+
         carouselTitle.innerHTML = `<a href="${atual.link}">${atual.texto}</a>`;
+    }
+
+    static Next() {
         Carousel._sequence++;
         if (Carousel._sequence >= Carousel._size) {
             Carousel._sequence = 0;
         }
+        Carousel.Show();
+    }
+
+    static Prev() {
+        Carousel._sequence--;
+        if (Carousel._sequence < 0) {
+            Carousel._sequence = Carousel._size - 1;
+        }
+        Carousel.Show();
     }
 };

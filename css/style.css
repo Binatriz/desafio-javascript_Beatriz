@@ -28,6 +28,34 @@ div#carousel {
     height: auto;
 }
 
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1351d8;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.arrow:hover {
+  background-color: #1b357e;
+}
+
+#prev {
+  left: 15px;
+}
+
+#next {
+  right: 15px;
+}
+
+
 div#carousel-title a {
     text-decoration: none;
 }
