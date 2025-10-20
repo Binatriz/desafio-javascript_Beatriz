@@ -19,6 +19,15 @@ div#carousel {
     transition: all .3s ease-in-out;
 }
 
+#carousel img {
+    width: 50%;
+}
+
+#carousel {
+    text-align: center;
+    height: auto;
+}
+
 div#carousel-title a {
     text-decoration: none;
 }
